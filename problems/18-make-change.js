@@ -53,31 +53,51 @@ solution so that it only calculates and compares all of the different
 combinations.
 ***********************************************************************/
 
-function makeBetterChange(target, coins = [25, 10, 5, 1]) {
-  let currChange = []
-  let leastChange = [];
+function makeBetterChange(target, coins = [25, 10, 5, 1], leastChange = []) {
+  debugger;
   if (target === 0) {
-    return 0;
+    return leastChange;
   }
 
-  if (currChange.length < leastChange.length) {
-    leastChange = currChange;
+  if (coins.length === 0 && target > 0) {
+    return null;
   }
 
-  for (let i = 0; i < coins.length; i++) {
-    const coin = coins[i];
-    let currCoin = coins[i];
-    let remainingCoins = coins.slice(0, i).concat(i + 1);
-
-    for (let remainingCoin of remainingCoins) {
-      if (remainingCoin <= currCoin) {
-
-      }
-    }
-
+  if (coins[0] > target) {
+    debugger;
+    return makeBetterChange(target, coins.slice(1), leastChange)
+  } else {
+    debugger;
+    leastChange.push(coins[0]);
+    debugger;
+    return makeBetterChange(target - coins[0], coins, leastChange);
   }
+
+  return leastChange;
+
+  // if (currChange.length < leastChange.length) {
+  //   leastChange = currChange;
+  // }
+
+  // for (let i = 0; i < coins.length; i++) {
+  //   const coin = coins[i];
+  //   let currCoin = coins[i];
+  //   let remainingCoins = coins.slice(0, i).concat(i + 1);
+
+  //   for (let remainingCoin of remainingCoins) {
+  //     if (remainingCoin <= currCoin) {
+
+  //     }
+  //   }
+
+  // }
 }
 
+console.log(makeBetterChange(21)); // [1, 10, 10]
+console.log(makeBetterChange(75)); // [25, 25, 25]
+console.log(makeBetterChange(33, [15, 3])); // [3, 15, 15]
+console.log(makeBetterChange(34, [15, 3])); // null
+console.log(makeBetterChange(24, [10, 7, 1])) // [7, 7, 10]
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
