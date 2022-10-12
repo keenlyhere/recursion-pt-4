@@ -30,19 +30,10 @@ We should return a tree like this:
 Example 2:
 Now imagine we have a database that returns a bunch of rows of data:
 
-const categories2 = [
-    { id: 'animals', 'parent': null },
-    { id: 'mammals', 'parent': 'animals' },
-    { id: 'cats', 'parent': 'mammals' },
-    { id: 'dogs', 'parent': 'mammals' },
-    { id: 'chihuahua', 'parent': 'dogs' },
-    { id: 'labrador', 'parent': 'dogs' },
-    { id: 'persian', 'parent': 'cats' },
-    { id: 'siamese', 'parent': 'cats' }
-];
+
 
 Then we call the function with the categories:
-const tree2 = makeTree(categories2, null);
+
 
 The call above should return the tree below:
 
@@ -64,8 +55,45 @@ The call above should return the tree below:
 ***********************************************************************/
 
 const makeTree = (categories, parent) => {
-  // Your code here
+    let tree = {};
+    let filtered = [];
+
+    for (let category of categories) {
+        if (category["parent"] === parent) {
+            filtered.push(category)
+        }
+    }
+
+    filtered.forEach((obj) => {
+        tree[obj.id] = makeTree(categories, obj.id);
+    })
+
+    return tree;
+
+    // for (let category of categories) {
+    //     if (category["parent"] === parent) {
+    //         tree[category.id] = makeTree(categories, category.parent)
+    //     }
+    // }
 };
+
+const categories2 = [
+    { id: 'animals', 'parent': null },
+    { id: 'mammals', 'parent': 'animals' },
+    { id: 'cats', 'parent': 'mammals' },
+    { id: 'dogs', 'parent': 'mammals' },
+    { id: 'chihuahua', 'parent': 'dogs' },
+    { id: 'labrador', 'parent': 'dogs' },
+    { id: 'persian', 'parent': 'cats' },
+    { id: 'siamese', 'parent': 'cats' }
+];
+
+// let iD = Object.values(categories2[0])[0]; // animals
+// console.log(iD)
+
+const tree2 = makeTree(categories2, null);
+console.log(JSON.stringify(makeTree(categories2, null)));
+
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 module.exports = makeTree;

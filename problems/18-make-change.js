@@ -54,7 +54,28 @@ combinations.
 ***********************************************************************/
 
 function makeBetterChange(target, coins = [25, 10, 5, 1]) {
-  // Your code here
+  let currChange = []
+  let leastChange = [];
+  if (target === 0) {
+    return 0;
+  }
+
+  if (currChange.length < leastChange.length) {
+    leastChange = currChange;
+  }
+
+  for (let i = 0; i < coins.length; i++) {
+    const coin = coins[i];
+    let currCoin = coins[i];
+    let remainingCoins = coins.slice(0, i).concat(i + 1);
+
+    for (let remainingCoin of remainingCoins) {
+      if (remainingCoin <= currCoin) {
+
+      }
+    }
+
+  }
 }
 
 
