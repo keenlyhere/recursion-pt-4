@@ -67,7 +67,8 @@ function makeBetterChange(target, coins = [25, 10, 5, 1], leastChange = []) {
     debugger;
     return makeBetterChange(target, coins.slice(1), leastChange)
   } else {
-    debugger;
+    debugger; // maybe add for loop here to iterate through each coin value that isn't > target?
+              // then find combo of coins that make up target and compare this combo with first combo? if smaller, then turn that into leastChange?
     leastChange.push(coins[0]);
     debugger;
     return makeBetterChange(target - coins[0], coins, leastChange);
